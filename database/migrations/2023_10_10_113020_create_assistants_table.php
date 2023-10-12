@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('assistants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('assistant_code', 3);;
+            $table->string('assistant_code', 3)->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
