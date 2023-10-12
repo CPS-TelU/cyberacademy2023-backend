@@ -95,4 +95,19 @@ class AcademyController extends Controller
             'data' => $academies
         ],200);
     }
+
+    public function destroy($id){
+        $academies = Academy::find($id);
+        if (!$academies){
+            return response()->json([
+                'status'=> 404,
+                'message'=> 'peserta tidak ada dalam database',
+            ]);
+        }
+        $academies->delete();
+        return response()->json([
+            'status'=> 200,
+            'message'=> 'data berhasil dihapus',
+        ]);
+    }
 }

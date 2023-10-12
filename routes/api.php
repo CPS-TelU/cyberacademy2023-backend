@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcademyController;
+use App\Http\Controllers\AssistantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,13 @@ use App\Http\Controllers\AcademyController;
 // });
 
 Route::post('/academy', [AcademyController::class, 'store']) ->name('academy.store');
-Route::get('/academy', [AcademyController::class, 'index']) ->name('academy.index');
-Route::get('/academy/{id}', [AcademyController::class,'show']) ->name('academy.show');
+Route::post('/assistant/register', [AssistantController::class, 'register']) ->name('assistant.register');
+Route::post('/assistant/login', [AssistantController::class, 'login']) ->name('assistant.login');
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/academy', [AcademyController::class, 'index']) ->name('academy.index');
+    Route::get('/academy/{id}', [AcademyController::class,'show']) ->name('academy.show');
+    Route::post('/assistant/logout', [AssistantController::class,'logout']) ->name('assistant.logout');
+    Route::delete('/academy/{id}', [AcademyController::class,'destroy']) ->name('academy.destroy');
+    
+});
