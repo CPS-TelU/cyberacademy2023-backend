@@ -36,7 +36,6 @@ class AcademyController extends Controller
             }
         }
 
-
         if ($errorMessages) {
             return response()->json([
                 'status' => 422,
@@ -60,7 +59,7 @@ class AcademyController extends Controller
         $academy->class = $data['class'];
 
 
-        if ($totalRegistrations >= 80) {
+        if ($totalRegistrations >= 2) {
             return response()->json([
                 'status' => 422,
                 'message ' => 'Kuota sudah penuh',
@@ -156,7 +155,6 @@ class AcademyController extends Controller
     {
         $totalRegistrations = Academy::count();
         $remainingQuota = 80 - $totalRegistrations;
-
         if ($remainingQuota == 0) {
             $remainingQuota = "Kuota sudah penuh";
         }
