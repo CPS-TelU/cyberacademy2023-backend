@@ -25,7 +25,7 @@ class AcademyController extends Controller
             'nim.unique' => 'MIM sudah terdaftar',
             'email.unique' => 'email sudah terdaftar',
             'phone_number.unique' => 'nomor hp sudah terdaftar',
-            'document.unique' => 'link document sudah ada di database',
+            'document.unique' => 'link document sudah terdaftar',
         ]);
 
         $errorMessages = [];
@@ -35,6 +35,7 @@ class AcademyController extends Controller
                 $errorMessages[] = ucfirst($field) . ' sudah terdaftar';
             }
         }
+
 
         if ($errorMessages) {
             return response()->json([
@@ -69,10 +70,10 @@ class AcademyController extends Controller
         }
 
         return response()->json([
-            'status' => 200,
+            'status' => 201,
             'message ' => 'Pendaftaran Berhasil',
             'data' => $academy
-        ], 200);
+        ], 201);
     }
 
     public function index()
@@ -91,7 +92,7 @@ class AcademyController extends Controller
         if (!$academies) {
             return response()->json([
                 'status' => 404,
-                'message' => 'peserta tidak ada dalam database',
+                'message' => 'Peserta tidak terdaftar',
                 'error' => 'Not Found'
             ], 404);
         }
@@ -141,13 +142,13 @@ class AcademyController extends Controller
         if (!$academies) {
             return response()->json([
                 'status' => 404,
-                'message' => 'peserta tidak ada dalam database',
+                'message' => 'Peserta tidak terdaftar',
             ]);
         }
         $academies->delete();
         return response()->json([
             'status' => 200,
-            'message' => 'data berhasil dihapus',
+            'message' => 'Peserta berhasil dihapus',
         ]);
     }
 
